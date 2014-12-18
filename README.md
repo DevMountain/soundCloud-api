@@ -83,6 +83,40 @@ Our files should appear in our index.html file in the following order:
 - Inject the $http service into our soundService
 - Inject our soundService into our MainController
 
+# Step 3 - Our first endpoint
+
+We will be using the official SoundCloud api, which you can view at: https://developers.soundcloud.com or more specifically [here](https://developers.soundcloud.com/docs/api/reference).
+
+Whenever you make an app with SoundCloud, you need to register your app, and get an API key. Rather than having everyone go register we will use a key for the class.
+
+API key
+```
+  bda4ada8694db06efcac9cf97b872b3e
+```
+
+*Note: using our api key (or any other kind of private stuff) in our front end code is a bad habit. Typically, sensitive information like this is kept in a file that our web server will access. A file that is not committed to github to ensure privacy. Someone could easily find our API key and use it in their own app. In future projects we will discuss some ways to better secure our apps.*
+
+*All in all, it's not going to affect us too much in this case.*
+
+- Our endpoint is going to get all of the tracks a user has uploaded.
+- Write a getUser function in our service.js file that is attached to our service using the 'this' keyword
+  - Example this.getUser = function() {}
+- We should be able to pass in a username parameter into the getUser function
+- Make the getUser function return an ajax request using angular's $http service
+  - make the method GET
+  - The url will be our main point of contact for the API:
+    - 'http://api.soundcloud.com/users/' + username + '/tracks.json?client_id=bda4ada8694db06efcac9cf97b872b3e'
+
+This url has an interesting anatomy:
+  - Main URL: http://api.soundcloud.com/
+  - Where we wanna go: users/' + username + '/tracks.json
+  - API Key: ?client_id=bda4ada8694db06efcac9cf97b872b3e
+
+This tells SoundCloud that we want to hit their users by the username of the variable username and download all of their tracks in JSON format. It then tells SoundCoud who we are. 
+
+
+
+
 
 
 
