@@ -168,7 +168,9 @@ Something we need to do now is access the SoundCloud JavaScript SDK. SDK stands 
 We are going to use the SoundCloud SDK to inject an iFrame into our app which will play the song we selected.
 
 - Inject the SoundCloud SDK into our app, like so:
-  - <script src="http://connect.soundcloud.com/sdk.js"></script>
+```` html
+  <script src="http://connect.soundcloud.com/sdk.js"></script>
+````
 
 - In our controller, let's create a $scope.play function that takes in a parameter called track_url
 - The following bit of code is going to do all of magic for us. Put it in the $scope.play function:
@@ -185,29 +187,6 @@ What this code is doing is essentially calling SoundCloud's function called oEmb
   - ng-bind-html="iFrame"
 
 Once we are rendering the iFrame, we should now get to play any song we've clicked on! 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
