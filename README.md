@@ -19,12 +19,12 @@ Let's get our basic Angular app set up.
 - Create a style.css file, and link it in the <head> tags
 
 Next, we have some CDNs we'll need to add. Mainly Bootstrap and AngularJS and jQuery
-
+``` html
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+```
 - Link the bootstrap css file above our style.css file in the <head> tags
 - Link jQuery file under the angular file
 - Link the bootstrap.js file under the jquery file.
