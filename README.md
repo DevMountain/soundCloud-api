@@ -133,7 +133,7 @@ This will give us the album art of each song. Notice that we put an ng-click on 
 We need to access the SoundCloud JavaScript SDK. SDK stands for Software Development Kit. It's essentially a fancy API made for JavaScript specifically. We won't spend too much time talking about how the SoundCloud SDK works. We just need it to play our tunes!
 
 # Step 7 - SoundCloud SDK
-We are going to use the SoundCloud SDK to inject an iFrame into our app which will play the song we selected.
+We are going to use the SoundCloud SDK to inject some HTML into our app which will play the song we selected.
 
 - Inject the SoundCloud SDK into our app, like so:
 ```html
@@ -145,23 +145,24 @@ We are going to use the SoundCloud SDK to inject an iFrame into our app which wi
 
 ``` javascript
     SC.oEmbed(track_url, { auto_play: true }, function(oEmbed) {
-      $scope.$apply($scope.iFrame = $sce.trustAsHtml(oEmbed.html));
+      $scope.$apply($scope.player_html = $sce.trustAsHtml(oEmbed.html));
     });
 ```
 
-This code is essentially calling SoundCloud's function oEmbed, and then in the callback is doing some angular magic so as to sanitize the code and pass it into our DOM. oEmbed comes with a lot of data, this bit of code strips out the iFrame for our use.
+This code is essentially calling SoundCloud's function oEmbed, and then in the callback is doing some angular magic so as to sanitize the code and pass it into our DOM. oEmbed comes with a lot of data, this bit of code strips out the HTML for our use.
 
 - Next, in our view we want to render the code. AngularJS has a very useful directive called ng-bind-html. If we try to say 
 
-```$scope.iFrame = '<iFrame>Crazy iFrame code!</iFrame>'```
+```$scope.player_html = '<div>Crazy SoundCloud player code!</div>'```
 
 and then attempt to render it in the DOM, we will end up with a string that says 
 
 ```html
-'<iFrame>Crazy iFrame code!</iFrame>'
+'<div>Crazy SoundCloud player code!</div>'
 ```
 
-Instead, we want our browser to actually render it like it would any other html. ng-bind-html does that for us. All we need to do is tell it what to render
-  - ng-bind-html="iFrame"
+Instead, we want our browser to actually render it like it would any other html. ng-bind-html does that for us. All we need to do is tell it what to render. Let's add a div to index.html and use ng-bind-html to point it to our iFrame scope var.
 
-Once we are rendering the iFrame, we should now get to play any song we've clicked on!
+ng-bind-html="player_html"
+
+Once we are rendering the player HTML, we should now get to play any song we've clicked on!
