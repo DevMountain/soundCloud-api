@@ -4,14 +4,6 @@ Today we are going to build an app with AngularJS using the SoundCloud API. This
 
 Try searching for: Yahtzel, or Carmadamusic.
 
-Before we begin we will need to have NodeJS installed on our computer. You should already have node by now.
-
-We will also need Bower to handle our dependencies. To install bower just type the following into your terminal:
-
-```
-  $ npm install -g bower
-```
-
 ## Step 1 - SetUp
 Let's get our basic Angular app set up.
 
@@ -24,39 +16,18 @@ Let's get our basic Angular app set up.
 - Create a controller.js file
 - Create a service.js file
 - Link the files you just created at the bottom of the body of the html file with script tags
-
-Now let's get bower working in our application.
-
-- In your terminal we will initiate bower in our app:
-
-```
-  $ bower init
-```
-
-- Go though the bower workflow as it sets up your application. If you don't know the answer to something, just press enter to leave it blank (or default value).
-
-- Now install AngularJS via bower:
-```
-  $ bower install angular
-```
-You'll notice a new file in your app called 'bower_components'. This is where the things we install with bower will be located.
-
-- Link our new angular files in our index.html file above all the rest of our other scripts
-  - Note: the file path will look something like 'bower_components/angular/angular.js'
 - Create a style.css file, and link it in the <head> tags
-- Add bootstrap to the application
 
-```
-  $ bower install bootstrap
-```
+Next, we have some CDNs we'll need to add. Mainly Bootstrap and AngularJS and jQuery
 
-Notice: in our bower_components file, it added not just bootstrap, but also jQuery. Bower checks for dependencies, and automatically installs them. #kindaneat.
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 - Link the bootstrap css file above our style.css file in the <head> tags
 - Link jQuery file under the angular file
 - Link the bootstrap.js file under the jquery file.
-
-Why does it matter where we link them? It matters because when our app is being read by the users browser, it will go from top to bottom, left to right. This means it's going to first load Bootstrap.css, then our styles.css (this means we can override bootstrap if we need to via styles.css since it's being read last). Then it will read Angular.JS, then jQUery.js, then bootstrap.js, then our custom js files. If bootstrap was above jQuery, we would end up with an error saying that bootstrap requires jQuery. That error is thrown even before the browser reads the next line.
 
 Our files should appear in our index.html file in the following order:
 - HEAD
