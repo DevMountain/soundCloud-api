@@ -13,45 +13,45 @@ Let's get our basic Angular app set up.
   - head tags
   - body tags
 - Create an app.js file
-- Create a controller.js file
-- Create a service.js file
+- Create a mainController.js file
+- Create a soundService.js file
 - Link the files you just created at the bottom of the body of the html file with script tags
-- Create a style.css file, and link it in the <head> tags
+- Create a styles.css file, and link it in the <head> tags
 
 Next, we have some CDNs we'll need to add. Mainly Bootstrap and AngularJS and jQuery
 ``` html
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 ```
-- Link the bootstrap css file above our style.css file in the <head> tags
-- Link jQuery file under the angular file
-- Link the bootstrap.js file under the jquery file.
+- Link the bootstrap css file above our styles.css file in the <head> tags
+- Link the angular, jQuery, and bootstrap js files at the tail end of the body tag.
 
-Our files should appear in our index.html file in the following order:
+Our files should appear in index.html file in the following order:
 - HEAD
   - bootstrap.css
   - style.css
 - BODY
-  - angular.js
-  - jquery.js
-  - bootstrap.js
+  - angular.min.js
+  - jquery.min.js
+  - bootstrap.min.js
   - app.js
-  - controller.js
-  - service.js
+  - mainController.js
+  - soundService.js
 
 # Step 2 - Initialize Angular
 
-- In app.js create a new angular module. Remember that when create an angular module you'll need to include an empty array or []. This tells angular that we are create a new module, rather than referring to an existing module.
-- Name the module 'sounder'
-- Include the module in our index.html file by adding ng-app="sounder" to our <html> tag.
-- Initialize the module in our controller.js file. Remember to omit the [] so as to tell angular that we are referring to the sounder module
-- Initialize the sounder module in our service.js in the same fashion
-- In our controller.js create a controller named 'MainController'
-- In our index.html's opening body tag add the controller: ng-controller="MainController"
-- Create a service named 'soundService' in our service.js file
-- Inject the $http service into our soundService
+- In app.js, create a new angular module called 'sounder'
+- Include the module in our index.html file by adding ng-app="sounder" to our `<html>` tag.
+
+### soundService.js
+- Set up the soundService, initializing the sounder module and building out the basic structure for the service
+- Inject the $http service into soundService
+
+### mainController.js
+- Set up the mainController.js file with the basic structure for the controller
+- In our index.html's opening body tag, add the controller: `ng-controller="MainController"`
 - Inject our soundService into our MainController
 
 # Step 3 - Our first endpoint
@@ -65,38 +65,36 @@ API key
   bda4ada8694db06efcac9cf97b872b3e
 ```
 
-*Note: using our api key (or any other kind of private stuff) in our front end code is a bad habit. Typically, sensitive information like this is kept in a file that our web server will access. A file that is not committed to github to ensure privacy. Someone could easily find our API key and use it in their own app. In future projects we will discuss some ways to better secure our apps.*
-
-*All in all, it's not going to affect us too much in this case.*
+*Note: using our api key (or any other kind of private stuff) in our front end code is a bad habit. Typically, sensitive information like this is kept in a file that our web server will access. A file that is not committed to github to ensure privacy. Someone could easily find our API key and use it in their own app. In future projects we will discuss some ways to better secure our apps. It'll work fine for our small project, but you would never want to share API keys publicly.*
 
 - Our endpoint is going to get all of the tracks a user has uploaded.
-- Write a getUser function in our service.js file that is attached to our service using the 'this' keyword
-  - Example this.getUser = function() {}
-- We should be able to pass in a username parameter into the getUser function
-- Make the getUser function return an ajax request using angular's $http service
-  - make the method GET
-  - The url will be our main point of contact for the API:
-    - 'http://api.soundcloud.com/users/' + username + '/tracks.json?client_id=bda4ada8694db06efcac9cf97b872b3e'
+- Write a getUser function in our soundService.js file that is attached to our service using the 'this' keyword
+  - `this.getUser = function() {}`
+- getUser should expect a "username" parameter
+- Use angular's $http service to get data for the getUser function
+  - GET `'http://api.soundcloud.com/users/' + username + '/tracks.json?client_id=bda4ada8694db06efcac9cf97b872b3e'`
+  - This url will be our main point of contact between the Soundcloud API and our app
 
-This url has an interesting anatomy:
+The url we used above has an interesting anatomy:
   - Main URL: http://api.soundcloud.com/
-  - Where we wanna go: users/' + username + '/tracks.json
+  - Where we want to go: users/' + username + '/tracks.json
   - API Key: ?client_id=bda4ada8694db06efcac9cf97b872b3e
 
-This tells SoundCloud that we want to hit their users by the username of the variable username and download all of their tracks in JSON format. It then tells SoundCoud who we are.
+This tells SoundCloud that we want to hit their users by the username of the variable username and download all of their tracks in JSON format. The API Key tells SoundCloud who we are.
 
-# Step 4 - Our controller part 1
+# Step 4 - Our controller (part 1)
 
-- Create a getUser function on our controller's scope object
-- Within $scope.getUser call soundService.getUser function in order to get the data from the service. Remember, the soundService.getUser needs to have something passed into it. Pass something default into it, like 'Yahtzel' (a soundcloud user):
-  - soundService.getUser('Yahtzel')
-- Append the .then function to the soundService.getUser function and console.log(data.data) within that function
-- Call the $scope.getUser function at the bottom of our controller like so:
-  - 
-- In our console, we should run our app by typer http-server (which should already be installed) in the root of our application
-- Once our server is running, go to localhost:8080 (or whatever port your http-server is running on)
+- Create a "getUser" function on our controller's scope object
+- Within `$scope.getUser` call `soundService.getUser` function in order to get the data from the service. Remember, the soundService.getUser needs to have a username passed into it. Pass a test value, like 'Yahtzel' (a soundcloud user):
 
-If we open the console we should see some data from Yahtzel. Now, we don't always want to get data from Yahtzel, so in our $scope.getUser function, let's change 'Yahtzel' to $scope.searchText.
+`soundService.getUser('Yahtzel')`
+
+- Remember that $http returns a promise, so use `.then` on soundService.getUser and console.log(data.data) within that function
+- Invoke $scope.getUser function at the bottom of the controller
+
+Try out your app so far. You can run your app by using http-server (which should already be installed) from the root of the application folder. Once the server is running, check out localhost:8080 (or whatever port your http-server is running on).
+
+Open the console, you should see some data from Yahtzel. Obviously we don't always want to get data from the same username (Yahtzel), so in our $scope.getUser function, let's change 'Yahtzel' to $scope.searchText.
 
 # Step 5 - Our view part 1
 
