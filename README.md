@@ -148,6 +148,7 @@ We are going to use the SoundCloud SDK to inject some HTML into our app which wi
       $scope.$apply($scope.player_html = $sce.trustAsHtml(oEmbed.html));
     });
 ```
+$sce is an angular tool being used to escape certain characters. We need to inject it in our controller in order for us to be able to use the `trustAsHtml` method as shown above.
 
 This code is essentially calling SoundCloud's function oEmbed, and then in the callback is doing some angular magic so as to sanitize the code and pass it into our DOM. oEmbed comes with a lot of data, this bit of code strips out the HTML for our use.
 
