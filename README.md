@@ -4,7 +4,7 @@ Today we are going to build an app with AngularJS using the SoundCloud API. This
 
 Try searching for: Yahtzel, or Carmadamusic.
 
-## Step 1 - SetUp
+## Step 1 - Set Up
 Let's get our basic Angular app set up.
 
 - Create an index.html file.
