@@ -1,4 +1,4 @@
-#SoundCloud API with Angular
+# SoundCloud API with Angular
 
 Today we are going to build an app with AngularJS using the SoundCloud API. This app will allow us to search SoundClouds databases via username, and listen to the tracks that user has uploaded. An example of this app can be viewed [here](http://eanplatter.github.io/sounder)
 
@@ -40,7 +40,7 @@ Our files should appear in index.html file in the following order:
   - mainController.js
   - soundService.js
 
-# Step 2 - Initialize Angular
+## Step 2 - Initialize Angular
 
 - In app.js, create a new angular module called 'sounder'
 - Include the module in our index.html file by adding ng-app="sounder" to our `<html>` tag.
@@ -165,7 +165,7 @@ ng-bind-html="player_html"
 
 Once we are rendering the player HTML, we should now get to play any song we've clicked on!
 
-## Black Diamond: Use routing + more API calls
+## Step 8 (Black Diamond): Build a user view
 
 Use ng-route to divide your app into two routes, `/#/tracks` and `/#/users/:userId`. Create views and controllers for each.
 
