@@ -51,8 +51,8 @@ Our files should appear in index.html file in the following order:
 
 ### mainController.js
 - Set up the mainController.js file with the basic structure for the controller
-- In our index.html's opening body tag, add the controller: `ng-controller="MainController"`
-- Inject our soundService into our MainController
+- In our index.html's opening body tag, add the controller: `ng-controller="mainController"`
+- Inject our soundService into our mainController
 
 ## Step 3 - Our first endpoint
 
