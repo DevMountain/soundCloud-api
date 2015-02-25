@@ -54,7 +54,7 @@ Our files should appear in index.html file in the following order:
 - In our index.html's opening body tag, add the controller: `ng-controller="MainController"`
 - Inject our soundService into our MainController
 
-# Step 3 - Our first endpoint
+## Step 3 - Our first endpoint
 
 We will be using the official SoundCloud api, which you can view at: https://developers.soundcloud.com or more specifically [here](https://developers.soundcloud.com/docs/api/reference).
 
@@ -82,7 +82,7 @@ The url we used above has an interesting anatomy:
 
 This tells SoundCloud that we want to hit their users by the username of the variable username and download all of their tracks in JSON format. The API Key tells SoundCloud who we are.
 
-# Step 4 - Our controller (part 1)
+## Step 4 - Our controller (part 1)
 
 - Create a "getUser" function on our controller's scope object
 - Within `$scope.getUser` call `soundService.getUser` function in order to get the data from the service. Remember, the soundService.getUser needs to have a username passed into it. Pass a test value, like 'Yahtzel' (a SoundCloud user):
@@ -96,7 +96,7 @@ Try out your app so far. You can run your app by using http-server (which should
 
 Open the console, you should see some data from Yahtzel. Obviously we don't always want to get data from the same username (Yahtzel), so in our $scope.getUser function, let's change 'Yahtzel' to $scope.searchText.
 
-# Step 5 - Our view (part 1)
+## Step 5 - Our view (part 1)
 
 - In our index.html page let's create a form with an input field that has an ng-model of 'searchText'
 - Add a button in the form that calls `getUser()` on ng-click
@@ -106,7 +106,7 @@ Now angular will see the input text, apply that text to $scope.searchText and pa
 
 Search some cool usernames! 'yahtzel', 'carmadamusic', 'flightfacilities' 'the-gtw'.
 
-#Step 6 - Our controller (part 2)
+## Step 6 - Our controller (part 2)
 
 - Inside our $scope.getUser function we are console.logging our data. Let's apply it to our $scope object so that we can render it in our view.
 - Do this in place of the console.log: `$scope.userData = data.data`
@@ -132,7 +132,7 @@ This will give us the album art of each song. Notice that we put an ng-click on 
 
 We need to access the SoundCloud JavaScript SDK. SDK stands for Software Development Kit. It's essentially a fancy API made for JavaScript specifically. We won't spend too much time talking about how the SoundCloud SDK works. We just need it to play our tunes!
 
-# Step 7 - SoundCloud SDK
+## Step 7 - SoundCloud SDK
 We are going to use the SoundCloud SDK to inject some HTML into our app which will play the song we selected.
 
 - Inject the SoundCloud SDK into our app, like so:
@@ -155,14 +155,22 @@ This code is essentially calling SoundCloud's function oEmbed, and then in the c
 
 ```$scope.player_html = '<div>Crazy SoundCloud player code!</div>'```
 
-and then attempt to render it in the DOM, we will end up with a string that says 
+and then attempt to render it in the DOM, the user will end up seeing something like this in the browser:
 
-```html
-'<div>Crazy SoundCloud player code!</div>'
-```
+![bad image](https://s3.amazonaws.com/f.cl.ly/items/0J2e45002w242k3v2m34/Screen%20Shot%202015-02-24%20at%205.13.29%20PM.png)
 
-Instead, we want our browser to actually render it like it would any other html. ng-bind-html does that for us. All we need to do is tell it what to render. Let's add a div to index.html and use ng-bind-html to point it to our iFrame scope var.
+Instead, we want our browser to actually render it like it would any other html. ng-bind-html does that for us. All we need to do is tell it what to render. Let's add a div to index.html and use ng-bind-html to point it to our player_html scope var.
 
 ng-bind-html="player_html"
 
 Once we are rendering the player HTML, we should now get to play any song we've clicked on!
+
+## Black Diamond: Use routing + more API calls
+
+Use ng-route to divide your app into two routes, `/#/tracks` and `/#/users/:userId`. Create views and controllers for each.
+
+In the tracks view, modify the markup so that the track's username is listed. When that username is clicked, take the user to `/#/users/:userId`, substituting userId with the userId found for that SoundCloud user.
+
+In your controller that handles users, inject a service that uses the [users.json endpoint](https://developers.soundcloud.com/docs/api/reference#users) to list the SoundCloud information for that user.
+
+
