@@ -175,3 +175,7 @@ In the tracks view, modify the markup so that the track's username is listed. Wh
 In your controller that handles users, inject a service that uses the [users.json endpoint](https://developers.soundcloud.com/docs/api/reference#users) to list the SoundCloud information for that user.
 
 
+
+## Copyright
+
+© DevMountain LLC, 2016. Unauthorized use and/or duplication of this material without express and written permission from DevMountain, LLC is strictly prohibited. Excerpts and links may be used, provided that full and clear credit is given to DevMountain with appropriate and specific direction to the original content.
